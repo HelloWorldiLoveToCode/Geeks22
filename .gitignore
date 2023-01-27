@@ -73,3 +73,6 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+/.vs
+/Geeks22/.vs/Geeks22/FileContentIndex
+/Geeks22/.vs/Geeks22/config
