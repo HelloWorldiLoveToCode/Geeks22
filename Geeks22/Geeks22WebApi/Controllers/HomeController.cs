@@ -2,20 +2,47 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Geeks22WebApi.Models;
+using System.Collections;
+using System.Text;
 
 namespace Geeks22WebApi.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
-        public ActionResult Index()
+        public HomeController()
         {
-            ViewBag.Title = "Home Page";
 
-            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<string> Index()
+        {
+            var db = new MyDbContext();
+
+            var books = await db.Set<Book>()
+                            .Include(a => a.Author)
+                            .Include(g => g.Genre)
+                            .ToListAsync();
+
+            var myStringBuilder = new StringBuilder();
+
+            foreach(var book in books)
+            {
+                myStringBuilder.Append(book.Title);
+                myStringBuilder.Append(book.CopiesSold);
+                myStringBuilder.Append(book.Author.FirstName);
+                myStringBuilder.Append(book.Author.LastName);
+                myStringBuilder.Append(book.Year);
+            }
+
+            return myStringBuilder.ToString();
         }
         
         [HttpGet]
