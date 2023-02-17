@@ -23,13 +23,10 @@ namespace Geeks22WebApi.Controllers
 
         public MyDbContext DbContext { get; set; }
         public HomeController() => DbContext = new MyDbContext();
-        
+
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var db = new MyDbContext();
-
-            db.Configuration.ProxyCreationEnabled = false;
             var books = await DbContext.Set<Book>().Include(g => g.Genre).Include(a => a.Author).ToListAsync();
 
             var myList = new List<BookViewModel>();
