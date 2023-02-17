@@ -10,39 +10,50 @@ using System.Web.Mvc;
 using Geeks22WebApi.Models;
 using System.Collections;
 using System.Text;
+using System.Net.Http;
+using System.Net;
+using System.Security.Principal;
+using System.Web.UI.WebControls;
+using System.Web.Http.Results;
 
 namespace Geeks22WebApi.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
-        {
 
-        }
-
-
+        public MyDbContext DbContext { get; set; }
+        public HomeController() => DbContext = new MyDbContext();
+        
         [HttpGet]
-        public async Task<string> Index()
+        public async Task<ActionResult> Index()
         {
             var db = new MyDbContext();
 
-            var books = await db.Set<Book>()
-                            .Include(a => a.Author)
-                            .Include(g => g.Genre)
-                            .ToListAsync();
+            db.Configuration.ProxyCreationEnabled = false;
+            var books = await DbContext.Set<Book>().Include(g => g.Genre).Include(a => a.Author).ToListAsync();
 
-            var myStringBuilder = new StringBuilder();
+            var myList = new List<BookViewModel>();
 
-            foreach(var book in books)
+            foreach (var book in books)
             {
-                myStringBuilder.Append(book.Title);
-                myStringBuilder.Append(book.CopiesSold);
-                myStringBuilder.Append(book.Author.FirstName);
-                myStringBuilder.Append(book.Author.LastName);
-                myStringBuilder.Append(book.Year);
+                myList.Add(new BookViewModel
+                {
+                    AuthorFirstName = book.Author.FirstName,
+                    AuthorLastName = book.Author.LastName,
+                    AuthorId = book.AuthorId,
+                    CopiesSold = book.CopiesSold,
+                    Description = book.Description,
+                    GenreName = book.Genre.Name,
+                    Id = book.Id,
+                    ISBN = book.ISBN,
+                    Price = book.Price,
+                    Title = book.Title,
+                    GenreId = book.GenreId,
+                    Year = book.Year
+                });
             }
 
-            return myStringBuilder.ToString();
+            return Json(myList, JsonRequestBehavior.AllowGet);
         }
         
         [HttpGet]
