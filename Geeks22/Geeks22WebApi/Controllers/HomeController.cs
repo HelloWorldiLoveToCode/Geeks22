@@ -50,6 +50,7 @@ namespace Geeks22WebApi.Controllers
                 });
             }
 
+            //return the book collection
             return Json(myList, JsonRequestBehavior.AllowGet);
         }
         
