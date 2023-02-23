@@ -33,6 +33,7 @@ namespace Geeks22WebApi.Controllers
 
             foreach (var book in books)
             {
+                //Anthony Here
                 myList.Add(new BookViewModel
                 {
                     AuthorFirstName = book.Author.FirstName,

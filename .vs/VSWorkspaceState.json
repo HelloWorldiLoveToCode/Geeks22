@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Geeks22",
+    "\\Geeks22\\Geeks22WebApi",
+    "\\Geeks22\\Geeks22WebApi\\Controllers"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\Geeks22\\Geeks22WebApi\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }
