@@ -24,8 +24,14 @@ namespace Geeks22WebApi.Controllers
         public MyDbContext DbContext { get; set; }
         public DetailsController() => DbContext = new MyDbContext();
 
-     
-        
-        
+        [HttpPost]
+        public async Task<ActionResult> createBook(Book book)
+        {
+            DbContext.Books.Add(book);
+            DbContext.SaveChangesAsync();
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
