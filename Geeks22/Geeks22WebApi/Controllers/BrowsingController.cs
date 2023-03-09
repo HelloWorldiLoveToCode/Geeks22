@@ -29,7 +29,7 @@ namespace Geeks22WebApi.Controllers
         public async Task<ActionResult> RetrieveBooksByGenre(string id)
         {
             var books = await DbContext.Set<Book>().Include(g => g.Genre).Include(a => a.Author).Where(b => b.Genre.Name.Equals(id)).ToListAsync();
-            if (!books.Any()) return Json("-1", JsonRequestBehavior.AllowGet);
+            if (!books.Any()) return Json("-1", JsonRequestBehavior.AllowGet); //-1 means invalid genre
 
             var myList = new List<BookViewModel>();
             
