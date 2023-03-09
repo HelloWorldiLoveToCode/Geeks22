@@ -20,26 +20,19 @@ namespace Geeks22WebApi.Controllers
 {
     public class ShoppingCartController : Controller
     {
-
         public MyDbContext DbContext { get; set; }
         public ShoppingCartController() => DbContext = new MyDbContext();
 
         [HttpGet]
         public async Task<ActionResult> RetrieveUserSubtotal(int id)
         {
-            var shoppingCartItems = await DbContext.Set<ShoppingCart>().AsNoTracking().Include(b => b.Book).Where(s => s.UserId == id).ToListAsync();
-            if (!shoppingCartItems.Any()) return Json("-1", JsonRequestBehavior.AllowGet);
-
             decimal subtotal = 0;
 
-            foreach (var shoppingCartItem in shoppingCartItems)
-            {
-                subtotal += shoppingCartItem.Book.Price;
-            }
+            var shoppingCartItems = await DbContext.Set<ShoppingCart>().AsNoTracking().Include(b => b.Book).Where(s => s.UserId == id).ToListAsync();
 
+            foreach (var shoppingCartItem in shoppingCartItems) subtotal += shoppingCartItem.Book.Price;
+            
             return Json(subtotal, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }
