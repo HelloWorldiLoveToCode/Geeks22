@@ -49,7 +49,7 @@ namespace Geeks22WebApi
 
         public int? CreditCardId { get; set; }
 
-        public bool UserType { get; set; }
+        public bool IsAdmin { get; set; }
 
         public virtual CreditCard CreditCard { get; set; }
 

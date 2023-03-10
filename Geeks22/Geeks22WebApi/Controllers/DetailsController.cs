@@ -25,10 +25,31 @@ namespace Geeks22WebApi.Controllers
         public DetailsController() => DbContext = new MyDbContext();
 
         [HttpPost]
-        public async Task<ActionResult> createBook(Book book)
+        public async Task<ActionResult> createBook(BookViewModel vm)
         {
-            DbContext.Books.Add(book);
-            DbContext.SaveChangesAsync();
+            var user = await DbContext.Set<User>().FirstOrDefaultAsync(u => u.Id == vm.UserId);
+
+            if (user.IsAdmin)
+            {
+
+                var book = new Book
+                {
+                    AuthorId = vm.AuthorId,
+                    GenreId = vm.GenreId,
+                    Title = vm.Title,
+                    Price = vm.Price,
+                    ISBN = vm.ISBN,
+                    Description = vm.Description,
+                    Year = vm.Year,
+                    CopiesSold = vm.CopiesSold
+
+                };
+
+                DbContext.Books.Add(book);
+                await DbContext.SaveChangesAsync();
+            }
+
+
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 

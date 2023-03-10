@@ -10,6 +10,9 @@ namespace Geeks22WebApi.Models
 
     public class BookViewModel
     {
+
+        public int UserId { get; set; }
+
         public int Id { get; set; }
 
         public int GenreId { get; set; }
