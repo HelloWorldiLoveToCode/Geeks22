@@ -25,7 +25,34 @@ namespace Geeks22WebApi.Controllers
         public ProfileController() => DbContext = new MyDbContext();
 
      
-        
+        [HttpGet]
+        public async Task<ActionResult> RetrieveUser(string id)
+        {
+            var userData = await DbContext.Set<User>().Include(c => c.CreditCard).FirstOrDefaultAsync(u => u.Username.Equals(id));
+
+            var userViewModel = new UserViewModel
+            {
+                Id = userData.Id,
+                Username = userData.Username,
+                Password = userData.Password,
+                FirstName = userData.FirstName,
+                LastName = userData.LastName,
+                Email = userData.Email,
+                StreetAddress = userData.StreetAddress,
+                City = userData.City,
+                State = userData.State,
+                Zipcode = userData.Zipcode,
+                CreditCardId = userData.CreditCardId,
+                CreditCardName = userData.CreditCard.Name,
+                CreditCardNumber = userData.CreditCard.Number,
+                CreditCardExpiration = userData.CreditCard.Expiration,
+                CreditCardCVV = userData.CreditCard.CVV,
+                IsAdmin = userData.IsAdmin,
+
+            };
+
+            return Json(userViewModel ,JsonRequestBehavior.AllowGet);
+        }
         
     }
 }
