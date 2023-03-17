@@ -35,6 +35,8 @@ namespace Geeks22WebApi.Models
         public int Year { get; set; }
 
         public int CopiesSold { get; set; }
+
+        public int Rating { get; set; }
     }
 
 }

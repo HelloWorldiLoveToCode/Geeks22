@@ -38,6 +38,8 @@ namespace Geeks22WebApi
 
         public int CopiesSold { get; set; }
 
+        public int Rating { get; set; }
+
         public virtual Author Author { get; set; }
 
         public virtual Genre Genre { get; set; }
