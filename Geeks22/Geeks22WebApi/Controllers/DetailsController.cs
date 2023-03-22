@@ -53,6 +53,33 @@ namespace Geeks22WebApi.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> RetrieveBookByISBN(string id)
+        {
+            var isbn = id;
+            var book = await DbContext.Set<Book>().FirstOrDefaultAsync(b => b.ISBN.Equals(isbn));
+
+            if (book == null)
+                return null;
+
+            var bvm = new BookViewModel
+            {
+                Id = book.Id,
+                GenreId = book.GenreId,
+                Title = book.Title,
+                AuthorId = book.AuthorId,
+                Price = book.Price,
+                ISBN = book.ISBN,
+                Description = book.Description,
+                Year = book.Year,
+                CopiesSold = book.CopiesSold
+
+            };
+
+            return Json(bvm, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
+
 }
