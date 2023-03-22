@@ -51,11 +51,44 @@ namespace Geeks22WebApi.Controllers
                         Id = book.Id,
                         GenreId = book.Genre.Id,
                         AuthorId = book.Author.Id,
+                        Rating = book.Rating,
 
                     });
                 
             }
            
+            return Json(myList, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> RetrieveTopSellers()
+        {
+            var topSellers = (await DbContext.Set<Book>().Include(g => g.Genre).Include(a => a.Author).ToListAsync()).OrderByDescending(b => b.CopiesSold).Take(10).ToList();
+
+            var myList = new List<BookViewModel>();
+
+            foreach (var topSeller in topSellers)
+            {
+                myList.Add(new BookViewModel
+
+                {
+                    Title = topSeller.Title,
+                    ISBN = topSeller.ISBN,
+                    Price = topSeller.Price,
+                    Year = topSeller.Year,
+                    CopiesSold = topSeller.CopiesSold,
+                    Description = topSeller.Description,
+                    GenreName = topSeller.Genre.Name,
+                    AuthorFirstName = topSeller.Author.FirstName,
+                    AuthorLastName = topSeller.Author.LastName,
+                    Id = topSeller.Id,
+                    GenreId = topSeller.Genre.Id,
+                    AuthorId = topSeller.Author.Id,
+                    Rating = topSeller.Rating,
+
+                });
+
+            }
+
             return Json(myList, JsonRequestBehavior.AllowGet);
         }
     }
