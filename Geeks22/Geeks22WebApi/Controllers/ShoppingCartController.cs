@@ -34,5 +34,25 @@ namespace Geeks22WebApi.Controllers
             
             return Json(subtotal, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public async Task<ActionResult>AddBook(int id, int id2)
+        {
+            var bookId = id;
+            var userId = id2;
+
+            var cartItem = new ShoppingCart
+            {
+                BookId    = bookId,
+                UserId    = userId,
+                CreatedOn = DateTime.Now
+            };
+
+            DbContext.ShoppingCarts.Add(cartItem);
+
+            await DbContext.SaveChangesAsync();
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 }
