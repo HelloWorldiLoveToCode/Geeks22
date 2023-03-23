@@ -20,65 +20,61 @@ namespace Geeks22WebApi.Controllers
 {
     public class HomeController : Controller
     {
-
         public MyDbContext DbContext { get; set; }
         public HomeController() => DbContext = new MyDbContext();
 
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public string Index()
+
         {
-            var books = await DbContext.Set<Book>().Include(g => g.Genre).Include(a => a.Author).ToListAsync();
+            var strMessage = new StringBuilder();
+            strMessage.Append("////////////////////////////////////////////////////////");
+            strMessage.Append("<br/>");
+            strMessage.Append("///// Geeks 22 Web API - FIU 2023 /////");
+            strMessage.Append("<br/>");
+            strMessage.Append("////////////////////////////////////////////////////////");
+            strMessage.Append("<br/>");
+            strMessage.Append("Created By:");
+            strMessage.Append("<br/>");
+            strMessage.Append("Anthony Lleo");
+            strMessage.Append("<br/>");
+            strMessage.Append("Brian Leach");
+            strMessage.Append("<br/>");
+            strMessage.Append("Alex Lejarraga Morales");
+            strMessage.Append("<br/>");
+            strMessage.Append("Chris Lavoro");
+            strMessage.Append("<br/>");
+            strMessage.Append("////////////////////////////////////////////////////////");
+            strMessage.Append("<br/>");
+            strMessage.Append("////////////////////////////////////////////////////////");
+            strMessage.Append("<br/>");
+            strMessage.Append("////////////////////////////////////////////////////////");
+            strMessage.Append("<br/>");
+            strMessage.Append("<br/>");
+            strMessage.Append("<a href='Home/HealthCheck'>Run Health Check</a>");
 
-            var myList = new List<BookViewModel>();
-
-            foreach (var book in books)
-            {
-                
-                myList.Add(new BookViewModel
-                {
-                    AuthorFirstName = book.Author.FirstName,
-                    AuthorLastName = book.Author.LastName,
-                    AuthorId = book.AuthorId,
-                    CopiesSold = book.CopiesSold,
-                    Description = book.Description,
-                    GenreName = book.Genre.Name,
-                    Id = book.Id,
-                    ISBN = book.ISBN,
-                    Price = book.Price,
-                    Title = book.Title,
-                    GenreId = book.GenreId,
-                    Year = book.Year
-                });
-            }
-
-            
-            return Json(myList, JsonRequestBehavior.AllowGet);
+            return strMessage.ToString();
         }
-        
-        [HttpGet]
-        public int Test(int id = 0)
-        {
-            return id;
-        }
-
 
         [HttpGet]
-        public JsonResult MyCollection()
+        public async Task<string> HealthCheck()
         {
-            var myList = new List<string>();
-            myList.Add("Hello");
-            myList.Add("Hello2");
-            myList.Add("Hello3");
-            myList.Add("Hello4");
-            myList.Add("Hello5");
+            var books = new List<Book>();
+            var hasException = false;
 
-            var myResult = JsonConvert.SerializeObject(myList);
+            try {books = await DbContext.Set<Book>().AsNoTracking().ToListAsync();} 
+            catch {hasException = true;}
 
-            return Json(myResult, JsonRequestBehavior.AllowGet);
-        }
+            var strMessage = new StringBuilder();
 
-    
+            if (books is null || hasException) strMessage.Append("Not ");
 
+            strMessage.Append("Healthy!");
+            strMessage.Append("<br/>");
+            strMessage.Append("<br/>");
+            strMessage.Append("<a href='/'>Return</a>");
 
+            return strMessage.ToString();   
+        }  
     }
 }

@@ -15,6 +15,8 @@ namespace Geeks22WebApi
 
         public int BookId { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
         public virtual Book Book { get; set; }
 
         public virtual User User { get; set; }

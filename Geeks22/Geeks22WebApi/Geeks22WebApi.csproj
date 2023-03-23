@@ -191,6 +191,7 @@
     <Content Include="Db\BookRating.sql" />
     <Content Include="Db\GeeksBookstoreEntireDbSchemaAndData.sql" />
     <Content Include="Db\InitialDataLoad.sql" />
+    <Content Include="Db\ShoppingCartCreatedOnField.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
