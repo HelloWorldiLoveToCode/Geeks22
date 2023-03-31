@@ -24,6 +24,7 @@ namespace Geeks22WebApi.Controllers
         public MyDbContext DbContext { get; set; }
         public DetailsController() => DbContext = new MyDbContext();
 
+        // Creates new book from book object
         [HttpPost]
         public async Task<ActionResult> createBook(BookViewModel vm)
         {
