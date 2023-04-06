@@ -54,5 +54,37 @@ namespace Geeks22WebApi.Controllers
 
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> RetrieveUserBookList(int id)
+        {
+            var shoppingCartItems = await DbContext.Set<ShoppingCart>()
+                .AsNoTracking()
+                .Include(b => b.Book)
+                .Include(b => b.Book.Author)
+                .Include(b => b.Book.Genre)
+                .Where(s => s.UserId == id)
+                .ToListAsync();
+
+            var bookList = shoppingCartItems.Select(b => new BookViewModel
+            {
+                AuthorFirstName = b.Book.Author.FirstName,
+                AuthorLastName = b.Book.Author.LastName,
+                AuthorId = b.Book.AuthorId,
+                CopiesSold = b.Book.CopiesSold,
+                Description = b.Book.Description,
+                GenreId = b.Book.GenreId,
+                GenreName = b.Book.Genre.Name,
+                Id = b.Id,
+                ISBN = b.Book.ISBN,
+                Price = b.Book.Price,
+                Rating = b.Book.Rating,
+                Title = b.Book.Title,
+                UserId = id,
+                Year = b.Book.Year
+            }).ToList();
+
+            return Json(bookList, JsonRequestBehavior.AllowGet);
+        }
     }
 }
