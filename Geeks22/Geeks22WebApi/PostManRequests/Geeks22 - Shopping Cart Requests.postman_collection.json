@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "8ea542b6-e7ef-4147-bbd3-5ef2e4f12740",
+		"name": "Geeks22 - Shopping Cart Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrieve User Subtotal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44393/ShoppingCart/RetrieveUserSubtotal/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"ShoppingCart",
+						"RetrieveUserSubtotal",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Id\": 1026,\r\n  \"Id2\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44393/ShoppingCart/AddBook",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"ShoppingCart",
+						"AddBook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve User Book List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44393/ShoppingCart/RetrieveUserSubtotal/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"ShoppingCart",
+						"RetrieveUserSubtotal",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Id\": 6,\r\n  \"Id2\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44393/ShoppingCart/DeleteBook",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"ShoppingCart",
+						"DeleteBook"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
