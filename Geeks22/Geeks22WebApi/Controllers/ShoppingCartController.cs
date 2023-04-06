@@ -86,5 +86,24 @@ namespace Geeks22WebApi.Controllers
 
             return Json(bookList, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteBook(int id, int id2)
+        {
+            var bookId = id;
+            var userId = id2;
+
+            var cartItem = await DbContext.Set<ShoppingCart>()
+                                .FirstOrDefaultAsync(s => s.UserId == userId && 
+                                                          s.BookId == bookId);
+
+            if (cartItem != null)
+            {
+                DbContext.ShoppingCarts.Remove(cartItem);
+                await DbContext.SaveChangesAsync();
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 }
