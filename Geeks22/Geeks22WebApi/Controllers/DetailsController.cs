@@ -104,6 +104,43 @@ namespace Geeks22WebApi.Controllers
 
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+
+        // Returns a list of books from author given authorId
+        [HttpGet]
+        public async Task<ActionResult> RetrieveBooksByAuthor(int id)
+        {
+            var authorId = id;
+            var books = await DbContext.Set<Book>().Where(b => b.AuthorId.Equals(authorId)).ToListAsync();
+            var matchingList = new List<BookViewModel>();
+
+            if (books == null)
+                return null;
+
+            foreach (var book in books)
+            {
+                matchingList.Add( new BookViewModel
+                {
+                    Title = book.Title,
+                    ISBN = book.ISBN,
+                    Price = book.Price,
+                    Year = book.Year,
+                    CopiesSold = book.CopiesSold,
+                    Description = book.Description,
+                    GenreName = book.Genre.Name,
+                    AuthorFirstName = book.Author.FirstName,
+                    AuthorLastName = book.Author.LastName,
+                    Id = book.Id,
+                    GenreId = book.Genre.Id,
+                    AuthorId = book.Author.Id,
+                    Rating = book.Rating,
+
+                });
+            }
+
+
+            return Json(matchingList, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }
