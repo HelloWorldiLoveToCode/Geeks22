@@ -81,7 +81,29 @@ namespace Geeks22WebApi.Controllers
             return Json(bvm, JsonRequestBehavior.AllowGet);
         }
 
+        // Creates new author from author object
+        [HttpPost]
+        public async Task<ActionResult> createAuthor(AuthorViewModel a)
+        {
+            var user = await DbContext.Set<User>().FirstOrDefaultAsync(u => u.Id == a.UserId);
 
+            if (user.IsAdmin)
+            {
+
+                var author = new Author
+                {
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    Biography = a.Biography,
+                    Publisher = a.Publisher
+                };
+
+                DbContext.Authors.Add(author);
+                await DbContext.SaveChangesAsync();
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }

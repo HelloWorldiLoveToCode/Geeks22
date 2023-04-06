@@ -170,6 +170,7 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\AuthorViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\CreditCard.cs" />
     <Compile Include="Models\Genre.cs" />
