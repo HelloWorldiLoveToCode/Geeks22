@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "75ba974b-70a5-490a-a6c3-419102f4d2b3",
+		"name": "TestRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25533487"
+	},
+	"item": [
+		{
+			"name": "RetrieveUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/get",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"johndoe\",\r\n    \"Email\": \"johnJ@example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44393/Profile/UpdateUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"Profile",
+						"UpdateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"johnJoseph\",\r\n    \"Password\": \"mypassword\",\r\n    \"FirstName\": \"John\",\r\n    \"LastName\": \"Joseph\",\r\n    \"Email\": \"johnJ@example.com\",\r\n    \"StreetAddress\": \"123 Main St\",\r\n    \"City\": \"Anytown\",\r\n    \"State\": \"CA\",\r\n    \"Zipcode\": \"12345\",\r\n    \"CreditCardId\": 1,\r\n    \"CreditCardName\": \"John J\",\r\n    \"CreditCardNumber\": \"1234567890123456\",\r\n    \"CreditCardExpiration\": \"12/24\",\r\n    \"CreditCardCVV\": \"123\",\r\n    \"IsAdmin\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44393/Profile/CreateUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"Profile",
+						"CreateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCreditCardForUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\": \"johndoe\",\r\n    \"Name\": \"Johns Mom\",\r\n    \"Number\": \"123234345456\",\r\n    \"Expiration\": \"Apr23\",\r\n    \"CVV\": \"111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44393/Profile/CreateCreditCardForUser/johndoe",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44393",
+					"path": [
+						"Profile",
+						"CreateCreditCardForUser",
+						"johndoe"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
